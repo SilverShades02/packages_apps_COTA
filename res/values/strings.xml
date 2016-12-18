@@ -1,27 +1,34 @@
 <resources>
     <!-- GENERAL -->
-    <string name="app_name">Paranoid Android Updates</string>
-    <string name="rom_name">Paranoid Android</string>
+    <string name="app_name">System update</string>
+	<string name="update_label">CypherOS</string>
 
     <!-- Up To Date -->
-    <string name="no_updates_title">Paranoid Android Updates</string>
-    <string name="no_updates_text">Your device is already up to date!</string>
+    <string name="no_updates_title">You\'re up to date</string>
+    <string name="no_updates_text">Nothing available here. You\'re on the latest version</string>
+	<string name="no_updates_check">Check</string>
 
     <!-- Update available -->
-    <string name="update_found_title">Update available</string>
-    <string name="update_found_text">Paranoid Android %1$s is available.\n\nTap on the button below to begin downloading. Downloading updates over a mobile network or while roaming may incur additional charges.\nThe update requires a restart.\n\nUpdate size: %2$s</string>
+    <string name="update_found_title">System update available</string>
+    <string name="update_found_text">This update will install a release version of CypherOS %1$s onto your device. Bug fixes and maintenance updates have been applied to this package. You can find more information at http://cypheros.co/bulletin. Downloading updates over cellular data or metered Wi-Fi networks may lead to additional charges.\n\nUpdate size: %2$s</string>
+	<string name="update_found_download">Download</string>
 
+	<!-- Update checking message -->
+	<string name="update_checking">Checking for updates....</string>
+	
     <!-- Downloading update -->
-    <string name="downloading_title">Downloading update…</string>
-    <string name="downloading_text">Downloading… %1$s\nTap on the button below to cancel downloading</string>
+    <string name="downloading_title">System update downloading...</string>
+    <string name="downloading_text">%1$s\n\nTap on the button below to cancel the download</string>
+	<string name="downloading_cancel">Cancel</string>
 
     <!-- Download failed -->
-    <string name="download_failed_title">Download failed</string>
+    <string name="download_failed_title">Update failed to download</string>
     <string name="download_failed_text">Update failed.\nTap on the button below to check for updates again.</string>
 
     <!-- Install -->
-    <string name="install_title">Install update</string>
+    <string name="install_title">Install system update</string>
     <string name="install_text">Update successfully downloaded.\n Tap on the button below to install.</string>
+	<string name="install_action">Install</string>
 
     <!-- MD5 -->
     <string name="calculating_md5">Calculating MD5 sum…</string>
@@ -29,9 +36,9 @@
     <string name="md5_install_anyway">Continue</string>
 
     <!-- Reboot -->
-    <string name="alert_reboot_install_title">Install update</string>
-    <string name="alert_reboot_one_message">Your device will reboot and install the update.</string>
-    <string name="alert_reboot_now">Install now</string>
+    <string name="alert_reboot_install_title">Update is ready</string>
+    <string name="alert_reboot_one_message">Your device will reboot and apply the update package. Please backup your data as it may be wiped during the update process.</string>
+    <string name="alert_reboot_now">Install</string>
 
     <!-- Errors -->
     <string name="error_cannot_resume">Error: The download couldn\'t be resumed</string>

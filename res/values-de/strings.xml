@@ -1,0 +1,49 @@
+<resources>
+    <!-- GENERAL -->
+    <string name="app_name">System Update</string>
+	<string name="update_label">CypherOS</string>
+
+    <!-- Up To Date -->
+    <string name="no_updates_title">System Update</string>
+    <string name="no_updates_text">Dein Gerät ist auf dem neuesten Stand!</string>
+
+    <!-- Update available -->
+    <string name="update_found_title">Neues Update ist verfügbar!</string>
+    <string name="update_found_text">CypherOS %1$s ist verfügbar.\n\nDrück auf den Knopf unten, um zu updaten. Was bei diesem Update neu hinzugekommen ist, kannst Du in unseren Post nachsehen.\n\nUm das Update zu installieren, wird ein Neustart benötigt.\nUpdate size: %2$s</string>
+
+	<!-- Update checking message -->
+	<string name="update_checking">Suche nach Updates...</string>
+	
+    <!-- Downloading update -->
+    <string name="downloading_title">Lädt Update herunter...</string>
+    <string name="downloading_text">Am runterladen... %1$s\nDrück auf den Knopf, um den Download abzubrechen</string>
+
+    <!-- Download failed -->
+    <string name="download_failed_title">Download fehlgeschlagen</string>
+    <string name="download_failed_text">Update fehlgeschlagen.\nDrück auf den Knopf unten, um nochmal nach Updates zu suchen.</string>
+
+    <!-- Install -->
+    <string name="install_title">Update Installieren</string>
+    <string name="install_text">Update erfolgreich runtergeladen.\n Drück auf den Knopf unten, um das Update zu installieren.</string>
+
+    <!-- MD5 -->
+    <string name="calculating_md5">Errechne MD5 Checksum</string>
+    <string name="md5_mismatch">MD5 falsch</string>
+    <string name="md5_install_anyway">Trotzdem Updaten</string>
+
+    <!-- Reboot -->
+    <string name="alert_reboot_install_title">Installiere Update</string>
+    <string name="alert_reboot_one_message">Dein Gerät wird neu starten und das Update installieren.</string>
+    <string name="alert_reboot_now">Jetzt installieren</string>
+
+    <!-- Errors -->
+    <string name="error_cannot_resume">Fehler: Der Download konnte nicht fortgesetzt werden</string>
+    <string name="error_device_not_found">Fehler: SD-Karte nicht gemountet</string>
+    <string name="error_file_already_exists">Fehler: Datei existiert bereits</string>
+    <string name="error_file_error">Fehler: Storage error</string>
+    <string name="error_http_data_error">Fehler: HTTP Fehler</string>
+    <string name="error_insufficient_space">Fehler: Zu wenig Speicherplatz verfügbar</string>
+    <string name="error_too_many_redirects">Fehler: Zu viele Weiterleitungen</string>
+    <string name="error_unhandled_http_code">Fehler: Unhandled HTTP Code</string>
+    <string name="error_unknown">Fehler: Unbekannt</string>
+</resources>

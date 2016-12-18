@@ -1,0 +1,45 @@
+<resources>
+    <!-- GENERAL -->
+    <string name="app_name">Aggiornamento del sistema</string>
+
+    <!-- Up To Date -->
+    <string name="no_updates_title">Aggiornamento del sistema</string>
+    <string name="no_updates_text">Il dispositivo è già aggiornato!</string>
+
+    <!-- Update available -->
+    <string name="update_found_title">Aggiornamento disponibile</string>
+    <string name="update_found_text">Aggiornamento CypherOS è disponibile.\nTocca sul bottone qui sotto per avviare il download. Per ottenere le informazioni più recenti su ciò che c\'è di nuovo in questo aggiornamento date un\'occhiata al nostro post di notizie.\nL\'aggiornamento richiede un riavvio.\n\nDimensioni aggiornamento: %1$s</string>
+
+    <!-- Downloading update -->
+    <string name="downloading_title">Download aggiornamento…</string>
+    <string name="downloading_text">Download in corso… %1$s\nToccare il pulsante qui sotto per annullare il download</string>
+
+    <!-- Download failed -->
+    <string name="download_failed_title">Download fallito</string>
+    <string name="download_failed_text">Aggiornamento non riuscito.\nToccare il pulsante qui sotto per controllare nuovamente gli aggiornamenti.</string>
+
+    <!-- Install -->
+    <string name="install_title">Installa aggiornamento</string>
+    <string name="install_text">Aggiornamento scaricato con successo.\nToccare il pulsante sotto per installare.</string>
+
+    <!-- MD5 -->
+    <string name="calculating_md5">Calcolatore MD5 sum…</string>
+    <string name="md5_mismatch">MD5 non corrispondente</string>
+    <string name="md5_install_anyway">Proseguire</string>
+
+    <!-- Reboot -->
+    <string name="alert_reboot_install_title">Installa aggiornamento</string>
+    <string name="alert_reboot_one_message">Il dispositivo si riavvierà per installare l\'aggiornamento.</string>
+    <string name="alert_reboot_now">Installa ora</string>
+
+    <!-- Errors -->
+    <string name="error_cannot_resume">Errore: Il download non può essere ripreso</string>
+    <string name="error_device_not_found">Errore: Scheda SD non montata</string>
+    <string name="error_file_already_exists">Errore: Il file esiste già</string>
+    <string name="error_file_error">Errore: Errore di archiviazione</string>
+    <string name="error_http_data_error">Errore: Errore HTTP</string>
+    <string name="error_insufficient_space">Errore: Spazio esaurito</string>
+    <string name="error_too_many_redirects">Errore: Troppi reindirizzamenti</string>
+    <string name="error_unhandled_http_code">Errore: Codice http non gestito</string>
+    <string name="error_unknown">Errore: Sconosciuto</string>
+</resources>

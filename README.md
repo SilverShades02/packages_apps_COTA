@@ -1,20 +1,17 @@
-About
------
-
-Paranoid over the air updates app
+CypherOS Over The Air Updates
 
 
 License
 -------
 
-ParanoidHub is licensed under the terms of the *GNU General Public License,
-version 3.0*. See the *COPYING* file for the full license text.
+COTA is licensed under the terms of the *GNU General Public License,
+version 3.0*. See the *COPYING* file for the full license text. Licensing include ParanoidHub.
 
 
 Using the app
 -------------
 
-ParanoidHub allows you to update your Paranoid Android ROM and your Google Apps.
+COTA allows you to update your CypherOS software along with your Google Apps.
 If an update is found, you'll receive a notification. Click it to open the app.
 Go to the Updates tab and click on the file you want to download.
 Once the download finishes, it will be added to the Install tab. Click the 
@@ -26,11 +23,8 @@ Only TWRP and CWM-based recoveries are supported. Closed source CWM is not suppo
 Building the app
 ----------------
 
-ParanoidHub needs to be installed in /system/priv-app to achieve the system
+COTA needs to be installed in /system/priv-app to achieve the system
 permissions it needs. If you want to debug the app with Eclipse, first
 delete the app from /data/app if you had it there and move it to /system/priv-app,
 grant the file with the necessary permissions and reboot. Then increment the version
 code in AndroidManifest.xml and the app will run with the right permissions. 
-
-
--EOF-
