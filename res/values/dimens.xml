@@ -6,18 +6,18 @@
     <dimen name="header_elevation">4dp</dimen>
   
     <!-- Header Image -->
-    <dimen name="header_image_padding_top">20dp</dimen>
-    <dimen name="header_image_padding_left">12dp</dimen>
+    <dimen name="header_image_padding_top">40dp</dimen>
+    <dimen name="header_image_padding_left">18dp</dimen>
 
     <!-- Header -->
     <dimen name="header_text_size">28sp</dimen>
     <dimen name="header_padding_top">10dp</dimen>
     <dimen name="header_padding_bottom">10dp</dimen>
-    <dimen name="header_padding_left">12dp</dimen>
+    <dimen name="header_padding_left">18dp</dimen>
 
     <!-- Message -->
     <dimen name="message_text_size">18sp</dimen>
-    <dimen name="message_padding_left">12dp</dimen>
+    <dimen name="message_padding_left">18dp</dimen>
     <dimen name="message_padding_bottom">20dp</dimen>
     <dimen name="text_line_spacing">5dp</dimen>
     <dimen name="text_extra_line_spacing">5dp</dimen>
