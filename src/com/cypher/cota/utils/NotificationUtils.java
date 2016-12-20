@@ -37,12 +37,12 @@ public class NotificationUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle(resources.getString(R.string.update_found_title))
+                .setContentText(resources.getString(R.string.update_found_notif))
                 .setSmallIcon(R.drawable.ic_update_notification)
                 .setContentIntent(pIntent)
                 .setOngoing(true);
-
-        builder.setContentText(resources.getString(R.string.update_label) + " "
+				
+		builder.setContentTitle(resources.getString(R.string.update_label) + " "
                 + infosRom[0].getVersion().toString());
 
         NotificationManager mNotificationManager =

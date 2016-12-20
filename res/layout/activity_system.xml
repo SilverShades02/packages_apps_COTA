@@ -41,10 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/headerimage"
-	    android:fontFamily="roboto-regular"
+	        android:fontFamily="roboto-regular"
             android:paddingTop="@dimen/header_padding_top"
-	    android:paddingBottom="@dimen/header_padding_bottom"
-	    android:paddingLeft="@dimen/header_padding_left"
+	        android:paddingBottom="@dimen/header_padding_bottom"
+	        android:paddingLeft="@dimen/header_padding_left"
             android:textColor="@color/colorTitle"
             android:textSize="@dimen/header_text_size" />
 
@@ -52,11 +52,11 @@
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-	    android:layout_below="@id/header"
+	        android:layout_below="@id/header"
             android:fontFamily="roboto-regular"
             android:lineSpacingExtra="@dimen/text_line_spacing"
             android:paddingLeft="@dimen/message_padding_left"
-	    android:paddingBottom="@dimen/message_padding_bottom"
+	        android:paddingBottom="@dimen/message_padding_bottom"
             android:textColor="@color/textColor"
             android:textSize="@dimen/message_text_size" />
       
@@ -82,7 +82,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:textColor="@android:color/white"
-	    app:backgroundTint="@color/colorPrimary"
+	        app:backgroundTint="@color/colorPrimary"
             app:rippleColor="@android:color/white" />
 
     </RelativeLayout>
