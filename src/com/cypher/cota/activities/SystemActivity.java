@@ -70,9 +70,9 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         setContentView(R.layout.activity_system);
 
         mHeader = (TextView) findViewById(R.id.header);
+		mProgress = (ProgressBar) findViewById(R.id.progress);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mMessage = (TextView) findViewById(R.id.message);
-		mProgress = (ProgressBar) findViewById(R.id.progress);
         mButton = (Button) findViewById(R.id.action);
 
         mUpdatePackage = null;
@@ -176,6 +176,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mHeader.setText(R.string.no_updates_title);
                     mMessage.setText(R.string.no_updates_text);
                     mButton.setText(R.string.no_updates_check);
+					mProgress.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage != null");
                 }
                 Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage == null");
@@ -188,6 +189,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                             mUpdatePackage.getVersion(),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
                     mButton.setText(R.string.update_found_download);
+					mProgress.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_FOUND = " + Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize())));
                 }
                 Log.v(TAG, "updateMessages:STATE_FOUND = mRomUpdater.isScanning || mRom == null");
@@ -203,12 +205,14 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mHeader.setText(R.string.download_failed_title);
                 mMessage.setText(R.string.download_failed_text);
                 mButton.setText(R.string.no_updates_check);
+				mProgress.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_ERROR");
                 break;
             case STATE_INSTALL:
                 mHeader.setText(R.string.install_title);
                 mMessage.setText(R.string.install_text);
                 mButton.setText(R.string.install_action);
+				mProgress.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_INSTALL");
                 break;
         }

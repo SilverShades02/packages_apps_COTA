@@ -34,7 +34,7 @@ public class NotificationUtils {
         fileInfo.mPackageInfosRom = infosRom;
         intent.putExtra(FILES_INFO, fileInfo);
         PendingIntent pIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentText(resources.getString(R.string.update_found_notif))
