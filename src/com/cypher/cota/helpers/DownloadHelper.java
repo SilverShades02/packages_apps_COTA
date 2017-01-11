@@ -196,7 +196,7 @@ public class DownloadHelper {
 
         sCallback.onDownloadStarted();
         Request request = new Request(Uri.parse(url));
-        request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setNotificationVisibility(Request.VISIBILITY_HIDDEN);
         request.setVisibleInDownloadsUi(false);
         request.setTitle(fileName);
 

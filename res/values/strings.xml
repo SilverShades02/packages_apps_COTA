@@ -20,6 +20,8 @@
     <!-- Downloading update -->
     <string name="downloading_title">System update downloading...</string>
     <string name="downloading_text">%1$s\n\nTap on the button below to cancel the download</string>
+	<string name="downloaded_complete">Download Completed</string>
+	<string name="update_downloaded_notif">Tap to install the update</string>
 	<string name="downloading_cancel">Cancel</string>
 
     <!-- Download failed -->

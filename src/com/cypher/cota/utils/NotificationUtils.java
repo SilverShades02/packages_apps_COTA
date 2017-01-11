@@ -19,7 +19,7 @@ public class NotificationUtils {
     public static final int NOTIFICATION_ID = 122303235;
     private static Updater.PackageInfo[] sPackageInfosRom = new Updater.PackageInfo[0];
 
-    public static void showNotification(Context context, Updater.PackageInfo[] infosRom) {
+    public static void onAvailable(Context context, Updater.PackageInfo[] infosRom) {
         Resources resources = context.getResources();
 
         if (infosRom != null) {
@@ -39,11 +39,36 @@ public class NotificationUtils {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentText(resources.getString(R.string.update_found_notif))
                 .setSmallIcon(R.drawable.ic_update_notification)
+				.setAutoCancel(true)
                 .setContentIntent(pIntent)
                 .setOngoing(true);
 				
 		builder.setContentTitle(resources.getString(R.string.update_label) + " "
                 + infosRom[0].getVersion().toString());
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+    }
+	
+	public static void onCompleted(Context context, Updater.PackageInfo[] infosRom) {
+        Resources resources = context.getResources();
+
+        Intent intent = new Intent(context, SystemActivity.class);
+        NotificationInfo fileInfo = new NotificationInfo();
+        fileInfo.mNotificationId = NOTIFICATION_ID;
+        intent.putExtra(FILES_INFO, fileInfo);
+        PendingIntent pIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, intent,
+		                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                .setContentText(resources.getString(R.string.update_downloaded_notif))
+                .setSmallIcon(R.drawable.ic_update_notification)
+				.setAutoCancel(true)
+                .setContentIntent(pIntent)
+                .setOngoing(true);
+				
+		builder.setContentTitle(resources.getString(R.string.downloaded_complete));
 
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

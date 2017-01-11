@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -57,12 +56,12 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     private List<File> mFiles = new ArrayList<>();
 
     private NotificationUtils.NotificationInfo mNotificationInfo;
+	private NotificationUtils mOnCompleted;
 
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mMessage;
     private Button mButton;
     private TextView mHeader;
-    private ProgressBar mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         setContentView(R.layout.activity_system);
 
         mHeader = (TextView) findViewById(R.id.header);
-		mProgress = (ProgressBar) findViewById(R.id.progress);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mMessage = (TextView) findViewById(R.id.message);
         mButton = (Button) findViewById(R.id.action);
@@ -159,12 +157,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         if (mState != STATE_DOWNLOADING) {
             return;
         }
-        mProgress.setMax(max);
-        mProgress.setProgress(progress);
-    }
-	
-    public ProgressBar getProgressBar() {
-        return mProgress;
     }
 
     private void updateMessages(PackageInfo info) {
@@ -176,7 +168,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mHeader.setText(R.string.no_updates_title);
                     mMessage.setText(R.string.no_updates_text);
                     mButton.setText(R.string.no_updates_check);
-					mProgress.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage != null");
                 }
                 Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage == null");
@@ -189,7 +180,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                             mUpdatePackage.getVersion(),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
                     mButton.setText(R.string.update_found_download);
-					mProgress.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_FOUND = " + Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize())));
                 }
                 Log.v(TAG, "updateMessages:STATE_FOUND = mRomUpdater.isScanning || mRom == null");
@@ -198,21 +188,18 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mHeader.setText(R.string.downloading_title);
                 mMessage.setText(String.format(getString(R.string.downloading_text), "0%"));
                 mButton.setText(R.string.downloading_cancel);
-                mProgress.setVisibility(View.VISIBLE);
                 Log.v(TAG, "updateMessages:STATE_DOWNLOADING = " + String.format(getString(R.string.downloading_text), "0%"));
                 break;
             case STATE_ERROR:
                 mHeader.setText(R.string.download_failed_title);
                 mMessage.setText(R.string.download_failed_text);
                 mButton.setText(R.string.no_updates_check);
-				mProgress.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_ERROR");
                 break;
             case STATE_INSTALL:
                 mHeader.setText(R.string.install_title);
                 mMessage.setText(R.string.install_text);
                 mButton.setText(R.string.install_action);
-				mProgress.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_INSTALL");
                 break;
         }
@@ -290,6 +277,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             mState = STATE_INSTALL;
             updateMessages((PackageInfo) null);
             addFile(uri, md5);
+			mOnCompleted.onCompleted(NOTIFICATION_ID);
         } else {
             mState = STATE_CHECK;
             mRomUpdater.check(true);
