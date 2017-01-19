@@ -51,7 +51,7 @@ public class NotificationUtils {
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 	
-	public static void onCompleted(Context context, Updater.PackageInfo[] infosRom) {
+	public static void onCompleted(Context context) {
         Resources resources = context.getResources();
 
         Intent intent = new Intent(context, SystemActivity.class);

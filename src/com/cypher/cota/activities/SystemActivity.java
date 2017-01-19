@@ -2,6 +2,7 @@ package com.cypher.cota.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -56,7 +57,13 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     private List<File> mFiles = new ArrayList<>();
 
     private NotificationUtils.NotificationInfo mNotificationInfo;
-	private NotificationUtils mOnCompleted;
+    private NotificationUtils mNotifUtils;
+      
+    private Context mContext;
+      
+    protected Context getContext() {
+        return mContext;
+    }
 
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mMessage;
@@ -277,7 +284,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             mState = STATE_INSTALL;
             updateMessages((PackageInfo) null);
             addFile(uri, md5);
-			mOnCompleted.onCompleted(NOTIFICATION_ID);
+			mNotifUtils.onCompleted(getContext());
         } else {
             mState = STATE_CHECK;
             mRomUpdater.check(true);
