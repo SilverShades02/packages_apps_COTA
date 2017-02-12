@@ -5,7 +5,7 @@
 
     <!-- Up To Date -->
     <string name="no_updates_title">You\'re up to date</string>
-    <string name="no_updates_text">Nothing available here. You\'re on the latest version</string>
+    <string name="no_updates_text">Version: %1$s</string>
 	<string name="no_updates_check">Check</string>
 
     <!-- Update available -->
