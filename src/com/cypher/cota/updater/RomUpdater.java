@@ -35,7 +35,7 @@ public class RomUpdater extends Updater {
 
     @Override
     public Version getVersion() {
-        return new Version(DeviceInfoUtils.getVersionString());
+        return new Version(DeviceInfoUtils.getExplicitVersion());
     }
 
     @Override

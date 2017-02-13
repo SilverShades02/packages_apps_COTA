@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 public class DeviceInfoUtils {
     private static final String MOD_VERSION = "ro.modversion";
-    private static final String PROPERTY_DEVICE = "ro.cypher.device";
+	private static final String AOSCP_VERSION = "ro.aoscp.version";
+    private static final String PROPERTY_DEVICE = "ro.aoscp.device";
     private static final String PROPERTY_DEVICE_EXT = "ro.product.device";
 
     public static String getDate() {
@@ -24,8 +25,12 @@ public class DeviceInfoUtils {
         return device == null ? "" : device.toLowerCase();
     }
 
-    public static String getVersionString() {
+    public static String getExplicitVersion() {
         return UpdateUtils.getProp(MOD_VERSION);
+    }
+	
+	public static String getAoscpVersion() {
+        return UpdateUtils.getProp(AOSCP_VERSION);
     }
 
     public static String getReadableDate(String fileDate) {

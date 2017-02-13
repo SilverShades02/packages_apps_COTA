@@ -33,8 +33,8 @@ public class BootReceiver extends BroadcastReceiver {
 
             HashMap<String, String> segmentation = new HashMap<>();
             segmentation.put("device", DeviceInfoUtils.getDevice());
-            segmentation.put("version", DeviceInfoUtils.getVersionString());
-            TrackHelper.track().screen("First Boot").variable(0, "Device", DeviceInfoUtils.getDevice()).variable(1, "Version", DeviceInfoUtils.getVersionString()).with(app.getTracker());
+            segmentation.put("version", DeviceInfoUtils.getExplicitVersion());
+            TrackHelper.track().screen("First Boot").variable(0, "Device", DeviceInfoUtils.getDevice()).variable(1, "Version", DeviceInfoUtils.getExplicitVersion()).with(app.getTracker());
             PreferenceUtils.setPreference(context, PreferenceUtils.PROPERTY_FIRST_BOOT, true);
         }
     }

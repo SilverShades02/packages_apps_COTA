@@ -78,7 +78,7 @@ public class RebootHelper {
             f.delete();
 
             int[] recoveries = new int[]{
-                    UpdateUtils.TWRP, UpdateUtils.CWM_BASED
+                    UpdateUtils.TWRP
             };
 
             for (int recovery : recoveries) {

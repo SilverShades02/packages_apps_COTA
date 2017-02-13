@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 
 public class UpdateUtils {
     public static final int TWRP = 1;
-    public static final int CWM_BASED = 2;
 
     public static String getProp(String prop) {
         try {

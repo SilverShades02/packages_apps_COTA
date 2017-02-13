@@ -24,7 +24,6 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.util.Log;
 
-import com.cypher.cota.helpers.recovery.CwmBasedRecovery;
 import com.cypher.cota.helpers.recovery.RecoveryInfo;
 import com.cypher.cota.helpers.recovery.TwrpRecovery;
 import com.cypher.cota.utils.FileUtils;
@@ -40,7 +39,6 @@ public class RecoveryHelper {
 
         mContext = context;
 
-        mRecoveries.put(UpdateUtils.CWM_BASED, new CwmBasedRecovery(context));
         mRecoveries.put(UpdateUtils.TWRP, new TwrpRecovery());
     }
 
