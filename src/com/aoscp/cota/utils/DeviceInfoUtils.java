@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class DeviceInfoUtils {
     private static final String MOD_VERSION = "ro.modversion";
 	private static final String AOSCP_VERSION = "ro.aoscp.version";
-    private static final String PROPERTY_DEVICE = "ro.aoscp.device";
+    private static final String PROPERTY_DEVICE = "ro.product.model";
     private static final String PROPERTY_DEVICE_EXT = "ro.product.device";
 
     public static String getDate() {
