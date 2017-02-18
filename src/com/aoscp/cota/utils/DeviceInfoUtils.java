@@ -22,7 +22,7 @@ public class DeviceInfoUtils {
         if (device == null || device.isEmpty()) {
             device = UpdateUtils.getProp(PROPERTY_DEVICE_EXT);
         }
-        return device == null ? "" : device.toLowerCase();
+        return device == null ? "" : device.toUpperCase();
     }
 
     public static String getExplicitVersion() {
