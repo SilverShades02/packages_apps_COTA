@@ -224,6 +224,8 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
         String getHost();
 
         String getSize();
+		
+		String getText();
 
         Version getVersion();
 

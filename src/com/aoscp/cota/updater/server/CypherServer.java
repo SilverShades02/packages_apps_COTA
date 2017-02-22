@@ -38,7 +38,7 @@ public class CypherServer implements Server {
 	
 	private static final String TAG = Constants.BASE_TAG + "CypherServer";
 
-    private static final String URL = "http://get.cypheros.co/updates/%s";
+    private static final String URL = "http://get.cypheros.co/updates/getter.php?d=%s";
 
     private String mDevice = null;
     private String mError = null;
@@ -68,7 +68,7 @@ public class CypherServer implements Server {
                 Version version = new Version(versionString, dateString);
                 if (Version.compare(mVersion, version) < 0) {
                     list.add(new UpdatePackage(mDevice, filename, version, file.getString("size"),
-                            file.getString("url"), file.getString("md5")));
+                            file.getString("url"), file.getString("md5"), file.getString("text")));
                     if (Constants.DEBUG) Log.d(TAG, "A new version is found!");
                 }
             }

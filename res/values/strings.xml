@@ -10,7 +10,7 @@
 
     <!-- Update available -->
     <string name="update_found_title">System update available</string>
-    <string name="update_found_text">This software update will install version %1$s onto your %2$s. You can find information about this update at http://cypheros.co/bulletin.</string>
+    <string name="update_found_text">This software update will install version %1$s onto your %2$s. %3$s</string>
 	<string name="update_found_size">Update size: %1$s</string>
 	<string name="update_found_notif">Tap to learn more and download</string>
 	<string name="update_found_download">Download</string>

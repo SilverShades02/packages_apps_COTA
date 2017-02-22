@@ -197,8 +197,9 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mHeader.setText(R.string.update_found_title);
                     mMessage.setText(String.format(
                             getResources().getString(R.string.update_found_text),
-                            mUpdatePackage.getVersion(),
-							mDeviceUtils.getModel()));
+							mUpdatePackage.getVersion(),
+							mDeviceUtils.getModel(),
+                            mUpdatePackage.getText()));
 					mSize.setText(String.format(
                             getResources().getString(R.string.update_found_size),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));

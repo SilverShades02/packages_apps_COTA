@@ -34,23 +34,25 @@ public class UpdatePackage implements PackageInfo, Serializable {
     private String mPath = null;
     private String mHost = null;
     private String mSize = null;
+	private String mText = null;
     private String mIncrementalPath = null;
     private Version mVersion;
     private boolean mIsDelta = false;
 
     public UpdatePackage(String device, String name, Version version, long size, String url,
-                         String md5) {
+                         String md5, String text) {
         this(device, name, version,
-                FileUtils.humanReadableByteCount(size, false), url, md5);
+                FileUtils.humanReadableByteCount(size, false), url, md5, text);
     }
 
     public UpdatePackage(String device, String name, Version version, String size, String url,
-                         String md5) {
+                         String md5, String text) {
         this.mFilename = name;
         this.mVersion = version;
         this.mSize = size;
         this.mPath = url;
         this.mMd5 = md5;
+		this.mText = text;
         mHost = mPath.replace("http://", "");
         mHost = mHost.replace("https://", "");
         mHost = mHost.substring(0, mHost.indexOf("/"));
@@ -104,5 +106,10 @@ public class UpdatePackage implements PackageInfo, Serializable {
     @Override
     public String getSize() {
         return mSize;
+    }
+	
+	@Override
+    public String getText() {
+        return mText;
     }
 }
