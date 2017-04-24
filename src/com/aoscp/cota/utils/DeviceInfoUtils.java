@@ -23,7 +23,7 @@ public class DeviceInfoUtils {
         if (device == null || device.isEmpty()) {
             device = UpdateUtils.getProp(PROPERTY_DEVICE_EXT);
         }
-        return device == null ? "" : device;
+        return device == null ? "" : device.toLowerCase();
     }
 	
 	public static String getModel() {
