@@ -92,7 +92,6 @@
             android:layout_width="wrap_content"
             android:minWidth="100dp"
             android:layout_height="wrap_content"
-			android:layout_below="@id/message"
             android:layout_gravity="center_vertical"
 			android:layout_below="@id/size"
             android:layout_marginTop="24dp"
