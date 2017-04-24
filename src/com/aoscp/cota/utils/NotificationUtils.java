@@ -53,7 +53,8 @@ public class NotificationUtils {
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 	
-	public static void onCompleted(Context context) {
+	public static void onCompleted() {
+		final Context context = getContext();
         Resources resources = context.getResources();
 
         Intent intent = new Intent(context, SystemActivity.class);
