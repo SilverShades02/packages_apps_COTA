@@ -45,14 +45,41 @@
             android:paddingTop="@dimen/header_padding_top"
 	        android:paddingBottom="@dimen/header_padding_bottom"
 	        android:paddingLeft="@dimen/header_padding_left"
+			android:paddingRight="@dimen/header_padding_right"
             android:textColor="@color/colorTitle"
             android:textSize="@dimen/header_text_size" />
+			
+		<ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/message_padding_left"
+			android:paddingRight="@dimen/message_padding_right"
+			android:layout_below="@id/header"
+            android:layout_weight="1"
+			android:indeterminate="false"
+            android:theme="@style/ProgressBar" />
 
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-	        android:layout_below="@id/header"
+	        android:layout_below="@id/progress_bar"
+            android:fontFamily="roboto-regular"
+            android:lineSpacingExtra="@dimen/text_line_spacing"
+            android:paddingLeft="@dimen/message_padding_left"
+			android:paddingRight="@dimen/message_padding_right"
+	        android:paddingBottom="@dimen/message_padding_bottom"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/message_text_size" />
+			
+		<TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/message"
             android:fontFamily="roboto-regular"
             android:lineSpacingExtra="@dimen/text_line_spacing"
             android:paddingLeft="@dimen/message_padding_left"
@@ -67,6 +94,7 @@
             android:layout_height="wrap_content"
 			android:layout_below="@id/message"
             android:layout_gravity="center_vertical"
+			android:layout_below="@id/size"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"

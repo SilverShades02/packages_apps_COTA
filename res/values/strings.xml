@@ -1,16 +1,17 @@
 <resources>
     <!-- GENERAL -->
-    <string name="app_name">System update</string>
+    <string name="app_name">System Updates</string>
 	<string name="update_label">CypherOS</string>
 
     <!-- Up To Date -->
     <string name="no_updates_title">You\'re up to date</string>
-    <string name="no_updates_text">Device: %1$s\nVersion: %2$s</string>
+    <string name="no_updates_text">Version: %1$s\n\nTap the button below to check for updates</string>
 	<string name="no_updates_check">Check</string>
 
     <!-- Update available -->
     <string name="update_found_title">System update available</string>
-    <string name="update_found_text">This update will install a release version of CypherOS %1$s onto your %2$s. Bug fixes and maintenance updates have been applied to this package. You can find more information at http://cypheros.co/bulletin. Downloading updates over cellular data or metered Wi-Fi networks may lead to additional charges.\n\nUpdate size: %3$s</string>
+    <string name="update_found_text">This software update will install version %1$s onto your %2$s. You can find information about this update at http://cypheros.co/bulletin.</string>
+	<string name="update_found_size">Update size: %1$s</string>
 	<string name="update_found_notif">Tap to learn more and download</string>
 	<string name="update_found_download">Download</string>
 
@@ -19,7 +20,7 @@
 	
     <!-- Downloading update -->
     <string name="downloading_title">System update downloading...</string>
-    <string name="downloading_text">%1$s\n\nTap on the button below to cancel the download</string>
+    <string name="downloading_text">Tap the button below to cancel the download</string>
 	<string name="downloaded_complete">Download Completed</string>
 	<string name="update_downloaded_notif">Tap to install the update</string>
 	<string name="downloading_cancel">Cancel</string>

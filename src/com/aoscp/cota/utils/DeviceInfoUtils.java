@@ -9,8 +9,9 @@ import java.util.concurrent.TimeUnit;
 public class DeviceInfoUtils {
     private static final String MOD_VERSION = "ro.modversion";
 	private static final String AOSCP_VERSION = "ro.aoscp.version";
-    private static final String PROPERTY_DEVICE = "ro.product.model";
+    private static final String PROPERTY_DEVICE = "ro.aoscp.device";
     private static final String PROPERTY_DEVICE_EXT = "ro.product.device";
+	private static final String PROPERTY_DEVICE_MODEL = "ro.product.model";
 
     public static String getDate() {
         return new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date(System
@@ -24,12 +25,20 @@ public class DeviceInfoUtils {
         }
         return device == null ? "" : device;
     }
+	
+	public static String getModel() {
+        String model = UpdateUtils.getProp(PROPERTY_DEVICE_MODEL);
+        if (model == null || model.isEmpty()) {
+            model = UpdateUtils.getProp(PROPERTY_DEVICE_EXT);
+        }
+        return model == null ? "" : model;
+    }
 
     public static String getExplicitVersion() {
         return UpdateUtils.getProp(MOD_VERSION);
     }
 	
-	public static String getAoscpVersion() {
+	public static String getVersionDisplay() {
         return UpdateUtils.getProp(AOSCP_VERSION);
     }
 

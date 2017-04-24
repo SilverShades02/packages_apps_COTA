@@ -21,6 +21,7 @@ public class NotificationUtils {
 
     public static void onAvailable(Context context, Updater.PackageInfo[] infosRom) {
         Resources resources = context.getResources();
+		int color = resources.getColor(R.color.colorPrimary);
 
         if (infosRom != null) {
             sPackageInfosRom = infosRom;
@@ -37,6 +38,7 @@ public class NotificationUtils {
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+		        .setColor(color)
                 .setContentText(resources.getString(R.string.update_found_notif))
                 .setSmallIcon(R.drawable.ic_update_notification)
 				.setAutoCancel(true)

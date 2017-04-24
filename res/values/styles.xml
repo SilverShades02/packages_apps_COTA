@@ -4,6 +4,10 @@
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimary</item>
     </style>
+	
+	<style name="ProgressBar">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 
     <style name="ActionBarStyle">
         <item name="android:textColor">@color/colorTitle</item>

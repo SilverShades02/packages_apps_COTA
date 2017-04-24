@@ -77,10 +77,10 @@ public class DownloadHelper {
                 default:
                     long totalBytes = statusRom[1];
                     long downloadedBytes = statusRom[2];
-                    long percent = totalBytes == -1 && downloadedBytes == -1 ? -1 : downloadedBytes
+                    long progress = totalBytes == -1 && downloadedBytes == -1 ? -1 : downloadedBytes
                             * 100 / totalBytes;
-                    if (totalBytes != -1 && downloadedBytes != -1 && percent != -1) {
-                        sCallback.onDownloadProgress((int) percent);
+                    if (totalBytes != -1 && downloadedBytes != -1 && progress != -1) {
+                        sCallback.onDownloadProgress((int) progress);
                     }
                     break;
             }
