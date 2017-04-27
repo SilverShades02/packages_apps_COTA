@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -72,6 +73,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mMessage;
+	private TextView mHighlights;
 	private TextView mSize;
     private Button mButton;
     private TextView mHeader;
@@ -87,6 +89,8 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         mMessage = (TextView) findViewById(R.id.message);
 		mSize = (TextView) findViewById(R.id.size);
         mButton = (Button) findViewById(R.id.action);
+		mHighlights = (TextView) findViewById(R.id.highlights);
+        mHighlights.setMovementMethod(new ScrollingMovementMethod());
 		
 		bar = (ProgressBar) findViewById(R.id.progress_bar);
 
@@ -187,7 +191,8 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                             getResources().getString(R.string.no_updates_text),
                             mDeviceUtils.getVersionDisplay()));
                     mButton.setText(R.string.no_updates_check);
-					bar.setVisibility(View.INVISIBLE);
+					bar.setVisibility(View.GONE);
+					mHighlights.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage != null");
                 }
                 Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage == null");
@@ -198,13 +203,16 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mMessage.setText(String.format(
                             getResources().getString(R.string.update_found_text),
 							mUpdatePackage.getVersion(),
-							mDeviceUtils.getModel(),
-                            mUpdatePackage.getText()));
+							mDeviceUtils.getModel()));
+					mHighlights.setText(String.format(
+                            getResources().getString(R.string.update_found_highlights),
+							mUpdatePackage.getText()));
 					mSize.setText(String.format(
                             getResources().getString(R.string.update_found_size),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
                     mButton.setText(R.string.update_found_download);
-					bar.setVisibility(View.INVISIBLE);
+					bar.setVisibility(View.GONE);
+					mHighlights.setVisibility(View.VISIBLE);
                     Log.v(TAG, "updateMessages:STATE_FOUND = " + Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize())));
                 }
                 Log.v(TAG, "updateMessages:STATE_FOUND = mRomUpdater.isScanning || mRom == null");
@@ -214,20 +222,23 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mMessage.setText(R.string.downloading_text);
                 mButton.setText(R.string.downloading_cancel);
 				bar.setVisibility(View.VISIBLE);
+				mHighlights.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_DOWNLOADING = " + (R.string.downloading_text));
                 break;
             case STATE_ERROR:
                 mHeader.setText(R.string.download_failed_title);
                 mMessage.setText(R.string.download_failed_text);
                 mButton.setText(R.string.no_updates_check);
-				bar.setVisibility(View.INVISIBLE);
+				bar.setVisibility(View.GONE);
+				mHighlights.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_ERROR");
                 break;
             case STATE_INSTALL:
                 mHeader.setText(R.string.install_title);
                 mMessage.setText(R.string.install_text);
                 mButton.setText(R.string.install_action);
-				bar.setVisibility(View.INVISIBLE);
+				bar.setVisibility(View.GONE);
+				mHighlights.setVisibility(View.VISIBLE);
                 Log.v(TAG, "updateMessages:STATE_INSTALL");
                 break;
         }
