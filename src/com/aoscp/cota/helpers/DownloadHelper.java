@@ -32,6 +32,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.aoscp.cota.R;
+import com.aoscp.cota.services.UpdateService;
 import com.aoscp.cota.utils.FileUtils;
 import com.aoscp.cota.utils.PreferenceUtils;
 

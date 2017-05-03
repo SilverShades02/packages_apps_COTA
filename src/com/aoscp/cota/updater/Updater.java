@@ -27,7 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.aoscp.cota.utils.NotificationUtils;
+import com.aoscp.cota.services.UpdateService;
 import com.aoscp.cota.utils.UpdateUtils;
 import com.aoscp.cota.utils.Version;
 
@@ -116,7 +116,7 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
             if (lastUpdates.length > 0) {
                 mServerWorks = true;
                 if (mFromAlarm) {
-                    NotificationUtils.onAvailable(getContext(), lastUpdates);
+                    UpdateService.startNotificationUpdate(getContext(), lastUpdates);
                 }
             } else {
                 if (error != null && !error.isEmpty()) {
