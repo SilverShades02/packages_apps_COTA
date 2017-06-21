@@ -72,10 +72,10 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mMessage;
-	private TextView mSize;
+    private TextView mSize;
     private Button mButton;
     private TextView mHeader;
-	private ProgressBar bar;
+    private ProgressBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,12 +130,20 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             }
         }
     }
+	
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onStart() {
+        super.onStart();
+	overridePendingTransition(R.anim.slide_next_in, R.anim.slide_next_out);
+    }
 
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onResume() {
         super.onResume();
         DownloadHelper.registerCallback(this);
+	overridePendingTransition(R.anim.slide_next_in, R.anim.slide_next_out);
     }
 
     @SuppressLint("MissingSuperCall")
