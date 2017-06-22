@@ -72,7 +72,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mMessage;
-	private TextView mHighlights;
 	private TextView mSize;
     private Button mButton;
     private TextView mHeader;
@@ -89,8 +88,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         mMessage = (TextView) findViewById(R.id.message);
 	mSize = (TextView) findViewById(R.id.size);
         mButton = (Button) findViewById(R.id.action);
-	mHighlights = (TextView) findViewById(R.id.highlights);
-        mHighlights.setMovementMethod(new ScrollingMovementMethod());
 	
 	bar = (ProgressBar) findViewById(R.id.progress_bar);
 
@@ -156,9 +153,9 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     @Override
     public void versionFound(PackageInfo[] info) {
-		//An update has been found
+	//An update has been found
         mState = STATE_FOUND;
-		if (info != null && info.length > 0) {
+	if (info != null && info.length > 0) {
             if(FileUtils.isOnDownloadList(this, info[0].getFilename())) {
                 //Now that the package is download, lets queue the install
                 mState = STATE_INSTALL;
@@ -189,12 +186,11 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mHeader.setText(R.string.no_updates_title);
 		    mMessage.setText(String.format(
                             getResources().getString(R.string.no_updates_text),
-			    mDeviceUtils.getModel(),
-                            mDeviceUtils.getVersionDisplay(),
-			    mDeviceUtils.getRealTime()));
+		            mDeviceUtils.getVersionDisplay(),
+	                    mDeviceUtils.getVersionRelease(),
+	                    mDeviceUtils.getRealTime()));
                     mButton.setText(R.string.no_updates_check);
-			    bar.setVisibility(View.GONE);
-			    mHighlights.setVisibility(View.GONE);
+	            bar.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage != null");
                 }
                 Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage == null");
@@ -204,17 +200,14 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                     mHeader.setText(R.string.update_found_title);
                     mMessage.setText(String.format(
                             getResources().getString(R.string.update_found_text),
-			    mUpdatePackage.getVersion(),
-			    mDeviceUtils.getModel()));
-	            mHighlights.setText(String.format(
-                            getResources().getString(R.string.update_found_highlights),
-			    mUpdatePackage.getText()));
+	                    mUpdatePackage.getVersion(),
+		            mDeviceUtils.getModel(),
+		            mUpdatePackage.getText()));
 		    mSize.setText(String.format(
                             getResources().getString(R.string.update_found_size),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
                     mButton.setText(R.string.update_found_download);
-			    bar.setVisibility(View.GONE);
-			    mHighlights.setVisibility(View.VISIBLE);
+	            bar.setVisibility(View.GONE);
                     Log.v(TAG, "updateMessages:STATE_FOUND = " + Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize())));
                 }
                 Log.v(TAG, "updateMessages:STATE_FOUND = mRomUpdater.isScanning || mRom == null");
@@ -225,7 +218,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mMessage.setText(R.string.downloading_text);
                 mButton.setText(R.string.downloading_cancel);
 		bar.setVisibility(View.VISIBLE);
-		mHighlights.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_DOWNLOADING = " + (R.string.downloading_text));
                 break;
             case STATE_ERROR:
@@ -234,7 +226,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mMessage.setText(R.string.download_failed_text);
                 mButton.setText(R.string.no_updates_check);
 		bar.setVisibility(View.GONE);
-		mHighlights.setVisibility(View.GONE);
                 Log.v(TAG, "updateMessages:STATE_ERROR");
                 break;
             case STATE_INSTALL:
@@ -243,7 +234,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                 mMessage.setText(R.string.install_text);
                 mButton.setText(R.string.install_action);
 		bar.setVisibility(View.GONE);
-		mHighlights.setVisibility(View.VISIBLE);
                 Log.v(TAG, "updateMessages:STATE_INSTALL");
                 break;
         }
@@ -252,7 +242,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     private final Button.OnClickListener mButtonListener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-		    if (Constants.DEBUG) Log.d(TAG, "Button clicked. mState = " + mState);
+	if (Constants.DEBUG) Log.d(TAG, "Button clicked. mState = " + mState);
             switch (mState) {
                 default:
                 case STATE_CHECK:

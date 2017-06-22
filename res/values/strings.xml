@@ -5,20 +5,19 @@
 
     <!-- Up To Date -->
     <string name="no_updates_title">Your system is up to date</string>
-    <string name="no_updates_text">Device: %1$s\nCypherOS version: %2$s\n\nLast checked for update at %3$s</string>
+    <string name="no_updates_text">CypherOS version: %1$s\nRelease: %2$s\n\nLast checked for update at %3$s</string>
     <string name="no_updates_check">Check</string>
 
     <!-- Update available -->
     <string name="update_found_title">System update available</string>
-    <string name="update_found_text">This software update will install version %1$s onto your %2$s. This update provides software enhancements, which are listed below.</string>
-    <string name="update_found_highlights">%1$s</string>
+    <string name="update_found_text">This update will install a release version of CypherOS %1$s on your %2$s. %3$s</string>
     <string name="update_found_size">Update size: %1$s</string>
     <string name="update_found_notif">Tap to learn more and download</string>
     <string name="update_found_download">Download</string>
 
     <!-- Update checking message -->
     <string name="update_checking">Checking for updates....</string>
-	
+
     <!-- Downloading update -->
     <string name="downloading_title">System update downloading...</string>
     <string name="downloading_text">Tap the button below to cancel the download</string>

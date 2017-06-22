@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="header_image_size">198dp</dimen>
-    <dimen name="header_title_size">72dp</dimen>
-    <dimen name="header_total_size">270dp</dimen>
-    <dimen name="header_elevation">4dp</dimen>
-  
+    <!-- General layout -->
+    <dimen name="margin_top">50dp</dimen>
+    <dimen name="margin_sides">24dp</dimen>
+
     <!-- Header Image -->
-    <dimen name="header_image_padding_top">40dp</dimen>
-    <dimen name="header_image_padding_left">18dp</dimen>
+    <dimen name="header_icon_size">32dp</dimen>
 
     <!-- Header -->
-    <dimen name="header_text_size">28sp</dimen>
-    <dimen name="header_padding_top">10dp</dimen>
-    <dimen name="header_padding_bottom">12dp</dimen>
-    <dimen name="header_padding_left">16dp</dimen>
-	<dimen name="header_padding_right">16dp</dimen>
+    <dimen name="header_title_size">24sp</dimen>
+    <dimen name="header_title_margin_top">15dp</dimen>
+    <dimen name="header_title_margin_bottom">2dp</dimen>
 
     <!-- Message -->
-    <dimen name="message_text_size">18sp</dimen>
-    <dimen name="message_padding_left">18dp</dimen>
-	<dimen name="message_padding_right">18dp</dimen>
-    <dimen name="message_padding_bottom">20dp</dimen>
-    <dimen name="text_line_spacing">5dp</dimen>
-    <dimen name="text_extra_line_spacing">5dp</dimen>
+    <dimen name="message_text_size">16sp</dimen>
+    <dimen name="message_margin_top">12dp</dimen>
+    <dimen name="message_margin_left">18dp</dimen>
+    <dimen name="message_margin_right">18dp</dimen>
+    <dimen name="message_margin_bottom">20dp</dimen>
+    <dimen name="message_line_spacing">3dp</dimen>
 </resources>

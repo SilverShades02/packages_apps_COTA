@@ -3,16 +3,10 @@
     <style name="SystemActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimary</item>
-    </style>
-	
-	<style name="ProgressBar">
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorPrimary</item>
     </style>
 
-    <style name="ActionBarStyle">
-        <item name="android:textColor">@color/colorTitle</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/header_text_size</item>
-        <item name="android:fontFamily">sans-serif</item>
+    <style name="ProgressBar">
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 </resources>
