@@ -88,7 +88,7 @@
             android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/highlights"
+            android:layout_below="@id/message"
             android:fontFamily="roboto-regular"
             android:lineSpacingExtra="@dimen/message_line_spacing"
             android:layout_marginLeft="@dimen/margin_sides"
