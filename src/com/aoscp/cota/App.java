@@ -11,7 +11,7 @@ public class App extends PiwikApplication {
 
     @Override
     public String getTrackerUrl() {
-        return "http://tracker.cypheros.co/";
+        return "http://tracking.cypheros.co/";
     }
 
     @Override
