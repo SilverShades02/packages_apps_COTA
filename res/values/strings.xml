@@ -2,6 +2,7 @@
     <!-- GENERAL -->
     <string name="app_name">System Updates</string>
     <string name="update_label">CypherOS</string>
+    <string name="update_system_notification_channel">System Update Alerts</string>
 
     <!-- Up To Date -->
     <string name="no_updates_title">Your system is up to date</string>
@@ -54,4 +55,36 @@
     <string name="error_too_many_redirects">Error: Too many redirects</string>
     <string name="error_unhandled_http_code">Error: Unhandled http code</string>
     <string name="error_unknown">Error: Unknown</string>
+
+    <!-- Up To Date -->
+    <string name="update_system_header_update_to_date">Your system is up to date</string>
+    <string name="update_system_brief_description_update_to_date">CypherOS version: %1$s\nMaintenance patch level:\n\nLast check for update at %2$s</string>
+    <string name="update_system_action_check"><![CDATA[<b>Check for update</b>]]></string>
+
+    <!-- Update available -->
+    <string name="update_system_header_update_available">System update available</string>
+    <string name="update_system_brief_description_update_available">%1$s</string>
+    <string name="update_system_action_download"><![CDATA[<b>Download</b>]]></string>
+    <string name="update_system_update_size">Update size: %1$s</string>
+    <string name="update_system_notification_update_available">CypherOS %1$s</string>
+    <string name="update_system_notification_update_available_desc">Tap to learn more and download</string>
+
+    <!-- Update checking message -->
+    <string name="update_system_header_update_checking">Checking for updates...</string>
+
+    <!-- Downloading update -->
+    <string name="update_system_header_update_downloading">System update downloading...</string>
+    <string name="update_system_brief_description_update_downloading">Tap the button below to cancel the download</string>
+    <string name="update_system_action_cancel"><![CDATA[<b>Cancel</b>]]></string>
+
+    <!-- Download failed -->
+    <string name="update_system_header_update_downloading_failed">Update failed to download</string>
+    <string name="update_system_brief_description_update_downloading_failed">Update failed.\nTap on the button below to check for updates again.</string>
+
+    <!-- Install -->
+    <string name="update_system_header_update_install">Install system update</string>
+    <string name="update_system_brief_description_update_install">Update successfully downloaded.\nTap on the button below to install.</string>
+    <string name="update_system_action_install"><![CDATA[<b>Install</b>]]></string>
+
+    <string name="update_system_learn_more">Learn more</string>
 </resources>

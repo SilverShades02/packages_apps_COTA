@@ -38,7 +38,7 @@ public class CypherServer implements Server {
 	
 	private static final String TAG = Constants.BASE_TAG + "CypherServer";
 
-    private static final String URL = "http://get.cypheros.co/updates/getter.php?d=%s";
+    private static final String URL = "http://updates.cypheros.co/getter.php?d=%s";
 
     private String mDevice = null;
     private String mError = null;

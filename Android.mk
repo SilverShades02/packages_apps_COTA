@@ -1,7 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_SDK_VERSION := current
 LOCAL_PACKAGE_NAME := COTA
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
@@ -12,6 +11,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
     android-support-design \
     android-support-v7-appcompat \
+    android-support-v7-recyclerview \
     volley
 
 LOCAL_SRC_FILES += $(call all-java-files-under, src)
@@ -24,6 +24,9 @@ LOCAL_AAPT_FLAGS := --auto-add-overlay \
     --extra-packages android.support.v4 \
     --extra-packages android.support.v7.appcompat \
     --extra-packages android.support.design
+
+include frameworks/opt/setupwizard/library/common-gingerbread.mk
+include frameworks/base/packages/SettingsLib/common.mk
 
 include $(BUILD_PACKAGE)
 

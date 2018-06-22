@@ -1,26 +1,46 @@
-package co.aoscp.cota.activities;
+/*
+ * Copyright (C) 2018 CypherOS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package co.aoscp.cota;
 
 import android.Manifest;
+import android.annotation.Nullable;
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.os.UserHandle;
+import android.provider.Settings;
+import android.text.Html;
+import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.util.Log;
+
+import com.android.settingslib.core.lifecycle.ObservableActivity;
+import com.android.setupwizardlib.GlifLayout;
 
 import co.aoscp.cota.R;
 import co.aoscp.cota.helpers.DownloadHelper;
@@ -34,18 +54,21 @@ import co.aoscp.cota.updater.Updater.UpdaterListener;
 import co.aoscp.cota.utils.Constants;
 import co.aoscp.cota.utils.DeviceInfoUtils;
 import co.aoscp.cota.utils.FileUtils;
+import co.aoscp.cota.utils.Utils;
 
 import org.piwik.sdk.DownloadTracker;
 import org.piwik.sdk.PiwikApplication;
 import org.piwik.sdk.TrackHelper;
 
 import java.io.File;
+import java.lang.CharSequence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemActivity extends AppCompatActivity implements UpdaterListener, 
+public class UpdateSystem extends ObservableActivity implements UpdaterListener, 
     DownloadHelper.DownloadCallback {
-    private static final String TAG = "COTA:SystemActivity";
+
+    private static final String TAG = "UpdateSystem";
 
     private int mState;
     private static final int STATE_CHECK = 0;
@@ -54,14 +77,17 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     private static final int STATE_INSTALL = 3;
     private static final int STATE_ERROR = 4;
 
+    private boolean mIsUpdate = false;
+    private boolean mIsDownloading = false;
+
     private RomUpdater mRomUpdater;
     private RebootHelper mRebootHelper;
 
     private PackageInfo mUpdatePackage;
     private List<File> mFiles = new ArrayList<>();
 
-	private DeviceInfoUtils mDeviceUtils;
-	
+    private DeviceInfoUtils mDeviceUtils;
+
     private UpdateService.NotificationInfo mNotificationInfo;
       
     private Context mContext;
@@ -70,40 +96,40 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         return mContext;
     }
 
-    private CoordinatorLayout mCoordinatorLayout;
-    private TextView mMessage;
-    private TextView mSize;
-    private Button mButton;
-    private TextView mHeader;
-    private ProgressBar bar;
+    private TextView mAction;
+    private String mPreAction;
+    private RelativeLayout mActionButton;
+    private ImageView mActionIcon;
+
+    private TextView mLearnMoreButton;
+
+    private String mPreDescription;
+    private TextView mDescription;
+    private TextView mUpdateSize;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	UpdateService.start(this);
-        setContentView(R.layout.activity_system);
+        UpdateService.start(this);
+        setTheme(R.style.Theme_UpdateSystem);
+        setContentView(R.layout.update_system);
 
-        mHeader = (TextView) findViewById(R.id.header);
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        mMessage = (TextView) findViewById(R.id.message);
-	mSize = (TextView) findViewById(R.id.size);
-        mButton = (Button) findViewById(R.id.action);
-	
-	bar = (ProgressBar) findViewById(R.id.progress_bar);
+        mDescription = (TextView) findViewById(R.id.description_text);
+        mUpdateSize = (TextView) findViewById(R.id.update_size);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        mAction = (TextView) findViewById(R.id.action_text);
+        mActionButton = (RelativeLayout) findViewById(R.id.action_button);
+        mActionIcon = (ImageView) findViewById(R.id.action_icon);
+
+        //mLearnMoreButton = (TextView) findViewById(R.id.update_learn_more_button);
 
         mUpdatePackage = null;
         DownloadHelper.init(this, this);
         mRomUpdater = new RomUpdater(this, true);
-        mRebootHelper = new RebootHelper(new RecoveryHelper(SystemActivity.this));
-
-        mButton.setOnClickListener(mButtonListener);
+        mRebootHelper = new RebootHelper(new RecoveryHelper(UpdateSystem.this));
         mRomUpdater.addUpdaterListener(this);
-
-        // Check for M permission to write on external
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        }
 
         if (mNotificationInfo != null) {
             if (mNotificationInfo.mNotificationId == UpdateService.NOTIFICATION_UPDATE) {
@@ -120,6 +146,25 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = Utils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        initViews();
+    }
+
+    protected void initViews() {
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        if (mActionButton != null) {
+            mActionButton.setOnClickListener(mActionListener);
+        }
+    }
+
+    @Override
     protected void onNewIntent(Intent intent) {
         mNotificationInfo = null;
         if (intent != null && intent.getExtras() != null) {
@@ -130,20 +175,12 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             }
         }
     }
-	
-    @SuppressLint("MissingSuperCall")
-    @Override
-    protected void onStart() {
-        super.onStart();
-	overridePendingTransition(R.anim.slide_next_in, R.anim.slide_next_out);
-    }
 
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onResume() {
         super.onResume();
         DownloadHelper.registerCallback(this);
-	overridePendingTransition(R.anim.slide_next_in, R.anim.slide_next_out);
     }
 
     @SuppressLint("MissingSuperCall")
@@ -152,7 +189,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         super.onPause();
         DownloadHelper.unregisterCallback();
     }
-	
+
     @Override
     public void startChecking() {
         mState = STATE_CHECK;
@@ -161,11 +198,9 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     @Override
     public void versionFound(PackageInfo[] info) {
-	//An update has been found
         mState = STATE_FOUND;
-	if (info != null && info.length > 0) {
+        if (info != null && info.length > 0) {
             if(FileUtils.isOnDownloadList(this, info[0].getFilename())) {
-                //Now that the package is download, lets queue the install
                 mState = STATE_INSTALL;
                 addFile(FileUtils.getFile(this, info[0].getFilename()), info[0].getMd5());
             }
@@ -178,7 +213,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             updateMessages(info.length > 0 ? info[0] : null);
         }
     }
-      
+
     public void setProgress(int max, int progress) {
         if (mState != STATE_DOWNLOADING) {
             return;
@@ -187,100 +222,101 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     private void updateMessages(PackageInfo info) {
         mUpdatePackage = info;
+        mIsUpdate = false;
+        mIsDownloading = false;
+        getLayout();
         switch (mState) {
             default:
             case STATE_CHECK:
                 if (mUpdatePackage == null) {
-                    mHeader.setText(R.string.no_updates_title);
-		    mMessage.setText(String.format(
-                            getResources().getString(R.string.no_updates_text),
-		            mDeviceUtils.getVersionDisplay(),
-	                    mDeviceUtils.getVersionRelease(),
-	                    mDeviceUtils.getRealTime()));
-                    mButton.setText(R.string.no_updates_check);
-	            bar.setVisibility(View.GONE);
-                    Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage != null");
+                    setHeaderText(R.string.update_system_header_update_to_date);
+                    mPreDescription = String.format(getResources().getString(
+                            R.string.update_system_brief_description_update_to_date), 
+                            mDeviceUtils.getVersionDisplay(),
+                            mDeviceUtils.getRealTime());
+                    mActionIcon.setImageResource(R.drawable.ic_action_check);
+                    mPreAction = getResources().getString(R.string.update_system_action_check);
                 }
-                Log.v(TAG, "updateMessages:STATE_CHECK = mUpdatePackage == null");
                 break;
             case STATE_FOUND:
                 if (!mRomUpdater.isScanning() && mUpdatePackage != null) {
-                    mHeader.setText(R.string.update_found_title);
-                    mMessage.setText(String.format(
-                            getResources().getString(R.string.update_found_text),
-	                    mUpdatePackage.getVersion(),
-		            mDeviceUtils.getModel(),
-		            mUpdatePackage.getText()));
-		    mSize.setText(String.format(
-                            getResources().getString(R.string.update_found_size),
+                    mIsUpdate = true;
+                    setHeaderText(R.string.update_system_header_update_available);
+                    mPreDescription = String.format(getResources().getString(
+                            R.string.update_system_brief_description_update_available), 
+                            mUpdatePackage.getText());
+                    mActionIcon.setImageResource(R.drawable.ic_action_download_install);
+                    mPreAction = getResources().getString(R.string.update_system_action_download);
+                    mUpdateSize.setText(String.format(
+                            getResources().getString(R.string.update_system_update_size),
                             Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
-                    mButton.setText(R.string.update_found_download);
-	            bar.setVisibility(View.GONE);
-                    Log.v(TAG, "updateMessages:STATE_FOUND = " + Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize())));
                 }
-                Log.v(TAG, "updateMessages:STATE_FOUND = mRomUpdater.isScanning || mRom == null");
                 break;
             case STATE_DOWNLOADING:
-	        UpdateService.stopNotificationUpdate();
-                mHeader.setText(R.string.downloading_title);
-                mMessage.setText(R.string.downloading_text);
-                mButton.setText(R.string.downloading_cancel);
-		bar.setVisibility(View.VISIBLE);
-                Log.v(TAG, "updateMessages:STATE_DOWNLOADING = " + (R.string.downloading_text));
+                mIsUpdate = true;
+                mIsDownloading = true;
+                setHeaderText(R.string.update_system_header_update_downloading);
+                mPreDescription = String.format(getResources().getString(
+                        R.string.update_system_brief_description_update_available), 
+                        mUpdatePackage.getText());
+                mActionIcon.setImageResource(R.drawable.ic_action_cancel);
+                mPreAction = getResources().getString(R.string.update_system_action_cancel);
+                mUpdateSize.setText(String.format(
+                        getResources().getString(R.string.update_system_update_size),
+                        Formatter.formatShortFileSize(this, Long.decode(mUpdatePackage.getSize()))));
                 break;
             case STATE_ERROR:
-	        UpdateService.stopNotificationUpdate();
-                mHeader.setText(R.string.download_failed_title);
-                mMessage.setText(R.string.download_failed_text);
-                mButton.setText(R.string.no_updates_check);
-		bar.setVisibility(View.GONE);
-                Log.v(TAG, "updateMessages:STATE_ERROR");
+                setHeaderText(R.string.update_system_header_update_downloading_failed);
+                mPreDescription = getResources().getString(
+                        R.string.update_system_brief_description_update_downloading_failed);
+                mActionIcon.setImageResource(R.drawable.ic_action_check);
+                mPreAction = getResources().getString(R.string.update_system_action_check);
                 break;
             case STATE_INSTALL:
-		UpdateService.stopNotificationUpdate();
-                mHeader.setText(R.string.install_title);
-                mMessage.setText(R.string.install_text);
-                mButton.setText(R.string.install_action);
-		bar.setVisibility(View.GONE);
-                Log.v(TAG, "updateMessages:STATE_INSTALL");
+                setHeaderText(R.string.update_system_header_update_install);
+                mPreDescription = getResources().getString(
+                        R.string.update_system_brief_description_update_install);
+                mActionIcon.setImageResource(R.drawable.ic_action_download_install);
+                mPreAction = getResources().getString(R.string.update_system_action_install);
                 break;
         }
+        CharSequence styledAction = Html.fromHtml(mPreAction);
+        CharSequence styledDesc = Html.fromHtml(mPreDescription);
+        mAction.setText(styledAction);
+        mDescription.setText(styledDesc);
+
+        mProgressBar.setVisibility(mIsDownloading ? View.VISIBLE : View.GONE);
+        mUpdateSize.setVisibility(mIsUpdate ? View.VISIBLE : View.GONE);
     }
-    
-    private final Button.OnClickListener mButtonListener = new Button.OnClickListener() {
+
+    private final View.OnClickListener mActionListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-	if (Constants.DEBUG) Log.d(TAG, "Button clicked. mState = " + mState);
             switch (mState) {
                 default:
                 case STATE_CHECK:
                     mState = STATE_CHECK;
                     mRomUpdater.check(true);
-		    updateMessages((PackageInfo) null);
-                    Log.v(TAG, "onClick:STATE_CHECK");
+                    updateMessages((PackageInfo) null);
                     break;
                 case STATE_FOUND:
                     if (!mRomUpdater.isScanning() && mUpdatePackage != null) {
                         mState = STATE_DOWNLOADING;
-                        DownloadHelper.registerCallback(SystemActivity.this);
+                        DownloadHelper.registerCallback(UpdateSystem.this);
                         DownloadHelper.downloadFile(mUpdatePackage.getPath(),
                                 mUpdatePackage.getFilename(), mUpdatePackage.getMd5());
                         updateMessages(mUpdatePackage);
                         TrackHelper.track().download().version(mUpdatePackage.getFilename()).with(((PiwikApplication) getApplication()).getTracker());
-                        Log.v(TAG, "onClick:STATE_FOUND = " + DeviceInfoUtils.getDevice() + ":" + mUpdatePackage.getFilename());
                     }
-                    Log.v(TAG, "onClick:STATE_FOUND = mRomUpdater.isScanning || mUpdatePackage == null");
                     break;
                 case STATE_DOWNLOADING:
                     mState = STATE_CHECK;
                     DownloadHelper.clearDownloads();
                     updateMessages((PackageInfo) null);
-                    Log.v(TAG, "onClick:STATE_DOWNLOADING");
                     break;
                 case STATE_ERROR:
                     mState = STATE_CHECK;
                     mRomUpdater.check(true);
-                    Log.v(TAG, "onClick:STATE_ERROR");
                     break;
                 case STATE_INSTALL:
                     String[] items = new String[mFiles.size()];
@@ -288,8 +324,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
                         File file = mFiles.get(i);
                         items[i] = file.getAbsolutePath();
                     }
-                    mRebootHelper.showRebootDialog(SystemActivity.this, items);
-                    Log.v(TAG, "onClick:STATE_INSTALL = " + android.text.TextUtils.join(", ", items));
+                    mRebootHelper.showRebootDialog(UpdateSystem.this, items);
                     break;
             }
         }
@@ -298,7 +333,7 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
     @Override
     public void onDownloadStarted() {
         mState = STATE_DOWNLOADING;
-	onDownloadProgress(-1);
+        onDownloadProgress(-1);
     }
 
     @Override
@@ -306,11 +341,11 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         mState = STATE_ERROR;
         updateMessages((PackageInfo) null);
     }
-	
-	 @Override
+
+    @Override
     public void onDownloadProgress(int progress) {
-	if (progress >= 0 && progress <= 100) {
-            bar.setProgress(progress);
+        if (progress >= 0 && progress <= 100) {
+            mProgressBar.setProgress(progress);
         }
     }
 
@@ -320,7 +355,6 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
             mState = STATE_INSTALL;
             updateMessages((PackageInfo) null);
             addFile(uri, md5);
-	    UpdateService.startNotificationInstall(getContext());
         } else {
             mState = STATE_CHECK;
             mRomUpdater.check(true);
@@ -335,20 +369,14 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
 
     private void addFile(final File file, final String md5) {
         if (md5 != null && !"".equals(md5)) {
-            final Snackbar md5Snackbar = Snackbar.make(mCoordinatorLayout, R.string.calculating_md5, Snackbar.LENGTH_INDEFINITE);
-            md5Snackbar.show();
             new Thread() {
                 public void run() {
                     final String calculatedMd5 = FileUtils.md5(file);
-                    md5Snackbar.dismiss();
                     runOnUiThread(new Runnable() {
 
                         public void run() {
                             if (md5.equals(calculatedMd5)) {
                                 reallyAddFile(file);
-                            }
-                            else {
-                                showMd5Mismatch(file);
                             }
                         }
                     });
@@ -364,18 +392,28 @@ public class SystemActivity extends AppCompatActivity implements UpdaterListener
         mFiles.add(file);
     }
 
-    private void showMd5Mismatch(final File file) {
-        Snackbar.make(mCoordinatorLayout, R.string.md5_mismatch, Snackbar.LENGTH_LONG)
-                .setAction(R.string.md5_install_anyway, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        reallyAddFile(file);
-                    }
-                })
-                .show();
-    }
-
     @Override
     public void checkError(String cause) {
+    }
+
+    protected GlifLayout getLayout() {
+        return (GlifLayout) findViewById(R.id.setup_wizard_layout);
+    }
+
+    protected void setHeaderText(int resId, boolean force) {
+        TextView layoutTitle = getLayout().getHeaderTextView();
+        CharSequence previousTitle = layoutTitle.getText();
+        CharSequence title = getText(resId);
+        if (previousTitle != title || force) {
+            if (!TextUtils.isEmpty(previousTitle)) {
+                layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+            }
+            getLayout().setHeaderText(title);
+            setTitle(title);
+        }
+    }
+
+    protected void setHeaderText(int resId) {
+        setHeaderText(resId, true /* force */);
     }
 }
