@@ -49,7 +49,6 @@ public class UpdateService extends Service {
         Intent i = new Intent(context, UpdateService.class);
         i.setAction(action);
         context.startService(i);
-        mNoMan = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         final NotificationChannel updateChannel = new NotificationChannel(
                 UPDATE_NOTIF_CHANNEL,
                 context.getString(R.string.update_system_notification_channel),
@@ -77,6 +76,7 @@ public class UpdateService extends Service {
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
         AlarmUtils.setAlarm(this, true);
+        mNoMan = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     @Override
