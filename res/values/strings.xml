@@ -58,7 +58,7 @@
 
     <!-- Up To Date -->
     <string name="update_system_header_update_to_date">Your system is up to date</string>
-    <string name="update_system_brief_description_update_to_date"><![CDATA[CypherOS version: %1$s<br>Maintenance patch level:<br><br>Last check for update at %2$s]]></string>
+    <string name="update_system_brief_description_update_to_date"><![CDATA[CypherOS version: %1$s<br>Maintenance patch level: %2$s<br><br>Last check for update at %3$s]]></string>
     <string name="update_system_action_check"><![CDATA[<b>Check for update</b>]]></string>
 
     <!-- Update available -->
