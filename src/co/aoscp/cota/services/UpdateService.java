@@ -49,14 +49,6 @@ public class UpdateService extends Service {
         Intent i = new Intent(context, UpdateService.class);
         i.setAction(action);
         context.startService(i);
-        final NotificationChannel updateChannel = new NotificationChannel(
-                UPDATE_NOTIF_CHANNEL,
-                context.getString(R.string.update_system_notification_channel),
-                NotificationManager.IMPORTANCE_HIGH);
-        updateChannel.setBlockableSystem(true);
-        updateChannel.enableLights(true);
-        updateChannel.enableVibration(true);
-        mNoMan.createNotificationChannel(updateChannel);
         mContext = context;
     }
 
@@ -77,6 +69,14 @@ public class UpdateService extends Service {
         handler = new Handler(handlerThread.getLooper());
         AlarmUtils.setAlarm(this, true);
         mNoMan = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationChannel updateChannel = new NotificationChannel(
+                UPDATE_NOTIF_CHANNEL,
+                mContext.getString(R.string.update_system_notification_channel),
+                NotificationManager.IMPORTANCE_HIGH);
+        updateChannel.setBlockableSystem(true);
+        updateChannel.enableLights(true);
+        updateChannel.enableVibration(true);
+        mNoMan.createNotificationChannel(updateChannel);
     }
 
     @Override
