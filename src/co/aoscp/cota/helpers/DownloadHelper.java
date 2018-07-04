@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import co.aoscp.cota.UpdateNotification;
 import co.aoscp.cota.R;
 import co.aoscp.cota.services.UpdateService;
 import co.aoscp.cota.utils.FileUtils;
@@ -48,6 +49,7 @@ public class DownloadHelper {
     private static DownloadCallback sCallback;
 
     private static boolean sDownloadingRom = false;
+    private static boolean sDownloadFinished = false;
     private static Runnable sUpdateProgress = new Runnable() {
 
         public void run() {
@@ -123,6 +125,7 @@ public class DownloadHelper {
     }
 
     public static void clearDownloads() {
+        sDownloadFinished = false;
         long id = Long.parseLong(PreferenceUtils.getPreference(sContext, PreferenceUtils.DOWNLOAD_ROM_ID, "-1"));
         checkDownloadFinished(id, false);
     }
@@ -144,6 +147,7 @@ public class DownloadHelper {
                     removeDownload(id, true);
                     int reasonText = getDownloadError(cursor);
                     sCallback.onDownloadError(sContext.getResources().getString(reasonText));
+                    sDownloadFinished = false;
                     break;
                 case DownloadManager.STATUS_SUCCESSFUL:
                     if (installIfFinished) {
@@ -165,6 +169,10 @@ public class DownloadHelper {
 
     public static boolean isDownloading() {
         return sDownloadingRom;
+    }
+
+    public static boolean isDownloadFinished() {
+        return sDownloadFinished;
     }
 
     public static boolean isDownloading(String fileName) {
@@ -234,11 +242,13 @@ public class DownloadHelper {
 
     private static void downloadSuccesful() {
         sDownloadingRom = false;
+        sDownloadFinished = true;
         PreferenceUtils.setDownloadRomId(sContext, null, null, null);
         sUpdateHandler.removeCallbacks(sUpdateProgress);
     }
 
     private static void cancelDownload(final long id) {
+        sDownloadFinished = false;
         removeDownload(id, true);
     }
 

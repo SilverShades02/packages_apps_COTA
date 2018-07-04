@@ -2,7 +2,8 @@
     <!-- GENERAL -->
     <string name="app_name">System Updates</string>
     <string name="update_label">CypherOS</string>
-    <string name="update_system_notification_channel">System Update Alerts</string>
+    <string name="update_system_notification_channel">System Update Available</string>
+    <string name="update_system_notification_channel_install">System Update Install</string>
 
     <!-- Up To Date -->
     <string name="no_updates_title">Your system is up to date</string>
@@ -85,6 +86,8 @@
     <string name="update_system_header_update_install">Install system update</string>
     <string name="update_system_brief_description_update_install">Update successfully downloaded.\nTap on the button below to install.</string>
     <string name="update_system_action_install"><![CDATA[<b>Install</b>]]></string>
+    <string name="update_system_notification_install_update">Update is ready</string>
+    <string name="update_system_notification_install_update_desc">Tap to install</string>
 
     <string name="update_system_learn_more">Learn more</string>
 </resources>

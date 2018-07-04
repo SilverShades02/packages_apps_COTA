@@ -27,6 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import co.aoscp.cota.UpdateNotification;
 import co.aoscp.cota.services.UpdateService;
 import co.aoscp.cota.utils.UpdateUtils;
 import co.aoscp.cota.utils.Version;
@@ -38,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Updater implements Response.Listener<JSONObject>, Response.ErrorListener {
+
     private Context mContext;
     private Server[] mServers;
     private PackageInfo[] mLastUpdates = new PackageInfo[0];
@@ -46,14 +49,19 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
     private Server mServer;
     private boolean mScanning = false;
     private boolean mFromAlarm;
+    private boolean mWithNotification;
     private boolean mServerWorks = false;
     private int mCurrentServer = -1;
 
-    public Updater(Context context, Server[] servers, boolean fromAlarm) {
+    private UpdateNotification mUpdateNotification;
+
+    public Updater(Context context, Server[] servers, boolean fromAlarm, boolean withNotification) {
         mContext = context;
         mServers = servers;
         mFromAlarm = fromAlarm;
+        mWithNotification = withNotification;
         mQueue = Volley.newRequestQueue(context);
+        mUpdateNotification = new UpdateNotification(context);
     }
 
     public abstract Version getVersion();
@@ -115,8 +123,8 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
             lastUpdates = list.toArray(new PackageInfo[list.size()]);
             if (lastUpdates.length > 0) {
                 mServerWorks = true;
-                if (mFromAlarm) {
-                    UpdateService.showUpdateAvailableNotification(getContext(), lastUpdates);
+                if (mFromAlarm && mWithNotification) {
+                    mUpdateNotification.showUpdate(getContext(), lastUpdates);
                 }
             } else {
                 if (error != null && !error.isEmpty()) {
@@ -224,8 +232,8 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
         String getHost();
 
         String getSize();
-		
-		String getText();
+
+        String getText();
 
         Version getVersion();
 

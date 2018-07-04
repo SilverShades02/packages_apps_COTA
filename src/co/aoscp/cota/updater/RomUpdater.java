@@ -28,9 +28,9 @@ import co.aoscp.cota.utils.Version;
 
 public class RomUpdater extends Updater {
 
-    public RomUpdater(Context context, boolean fromAlarm) {
+    public RomUpdater(Context context, boolean fromAlarm, boolean withNotification) {
         super(context, new Server[]{
-                new CypherServer()}, fromAlarm);
+                new CypherServer()}, fromAlarm, withNotification);
     }
 
     @Override
