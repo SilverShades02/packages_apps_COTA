@@ -7,28 +7,20 @@
   <!-- Up To Date -->
   <string name="no_updates_title">System Update</string>
   <string name="no_updates_text">Dein Gerät ist auf dem neuesten Stand!</string>
-  <string name="no_updates_check">Prüfen</string>
   <!-- Update available -->
   <string name="update_found_title">Neues Update ist verfügbar!</string>
   <string name="update_found_text">CypherOS %1$s ist verfügbar.\n\nDrück auf den Knopf unten, um zu updaten. Was bei diesem Update neu hinzugekommen ist, kannst Du in unseren Post nachsehen.\n\nUm das Update zu installieren, wird ein Neustart benötigt.\nUpdate size: %2$s</string>
-  <string name="update_found_size">Update Größe: %1$s</string>
-  <string name="update_found_notif">Tippen um mehr zu erfahren und zum Download</string>
-  <string name="update_found_download">Herunterladen</string>
   <!-- Update checking message -->
   <string name="update_checking">Suche nach Updates...</string>
   <!-- Downloading update -->
   <string name="downloading_title">Lädt Update herunter...</string>
   <string name="downloading_text">Am runterladen... %1$s\nDrück auf den Knopf, um den Download abzubrechen</string>
-  <string name="downloaded_complete">Download abgeschlossen</string>
-  <string name="update_downloaded_notif">Tippen um Update zu installieren</string>
-  <string name="downloading_cancel">Abbrechen</string>
   <!-- Download failed -->
   <string name="download_failed_title">Download fehlgeschlagen</string>
   <string name="download_failed_text">Update fehlgeschlagen.\nDrück auf den Knopf unten, um nochmal nach Updates zu suchen.</string>
   <!-- Install -->
   <string name="install_title">Update Installieren</string>
   <string name="install_text">Update erfolgreich runtergeladen.\n Drück auf den Knopf unten, um das Update zu installieren.</string>
-  <string name="install_action">Installieren</string>
   <!-- MD5 -->
   <string name="calculating_md5">Errechne MD5 Checksum</string>
   <string name="md5_mismatch">MD5 falsch</string>
@@ -49,27 +41,16 @@
   <string name="error_unknown">Fehler: Unbekannt</string>
   <!-- Up To Date -->
   <string name="update_system_header_update_to_date">System Update</string>
-  <string name="update_system_action_check"><![CDATA[<b>Suche nach Update</b>]]></string>
   <!-- Update available -->
   <string name="update_system_header_update_available">Neues Update ist verfügbar!</string>
-  <string name="update_system_brief_description_update_available">%1$s</string>
-  <string name="update_system_action_download"><![CDATA[<b>Download</b>]]></string>
-  <string name="update_system_update_size">Update Größe: %1$s</string>
-  <string name="update_system_notification_update_available">CypherOS %1$s</string>
-  <string name="update_system_notification_update_available_desc">Tippen um mehr zu erfahren und zum Download</string>
   <!-- Update checking message -->
-  <string name="update_system_header_update_checking">Nach Aktualisierungen suchen...</string>
   <!-- Downloading update -->
   <string name="update_system_header_update_downloading">Lädt Update herunter...</string>
-  <string name="update_system_brief_description_update_downloading">Tippe auf den Button unten, um den Download abzubrechen</string>
-  <string name="update_system_action_cancel"><![CDATA[<b>Abbrechen</b>]]></string>
+  <string name="update_system_brief_description_update_downloading">Am runterladen... %1$s\nDrück auf den Knopf, um den Download abzubrechen</string>
   <!-- Download failed -->
   <string name="update_system_header_update_downloading_failed">Download fehlgeschlagen</string>
   <string name="update_system_brief_description_update_downloading_failed">Update fehlgeschlagen.\nDrück auf den Knopf unten, um nochmal nach Updates zu suchen.</string>
   <!-- Install -->
   <string name="update_system_header_update_install">Update Installieren</string>
-  <string name="update_system_brief_description_update_install">Update erfolgreich heruntergeladen.\nTippe auf den Button zum installieren.</string>
-  <string name="update_system_action_install"><![CDATA[<b>Installieren</b>]]></string>
   <string name="update_system_notification_install_update">Installiere Update</string>
-  <string name="update_system_learn_more">Erfahre mehr</string>
 </resources>

@@ -4,33 +4,23 @@
   <!-- GENERAL -->
   <string name="app_name">Atualização do sistema</string>
   <string name="update_label">CypherOS</string>
-  <string name="update_system_notification_channel">Atualização do Sistema Disponível</string>
-  <string name="update_system_notification_channel_install">Instalar Atualização do Sistema</string>
   <!-- Up To Date -->
   <string name="no_updates_title">Atualização do sistema</string>
   <string name="no_updates_text">Seu dispositivo está atualizado!</string>
-  <string name="no_updates_check">Verificar</string>
   <!-- Update available -->
   <string name="update_found_title">Nova atualização disponível</string>
   <string name="update_found_text">Versão: %1$s está disponível\n\nEsta atualização fornece atualizações gerais de desempenho e manutenção para seu dispositivo. Você pode encontrar mais informações em http://cypheros.co/bulletin\nPara começar a atualização, toque no botão de download abaixo\n\nEsta atualização requer um reinício\nPacote de atualização: %2$s</string>
-  <string name="update_found_size">Tamanho da atualização: %1$s</string>
-  <string name="update_found_notif">Toque para saber mais e baixar</string>
-  <string name="update_found_download">Baixar</string>
   <!-- Update checking message -->
   <string name="update_checking">Verificando atualizações....</string>
   <!-- Downloading update -->
   <string name="downloading_title">Fazendo download da atualização…</string>
   <string name="downloading_text">Fazendo o download… %1$s\nToque no botão abaixo para cancelar o download</string>
-  <string name="downloaded_complete">Transferência concluída</string>
-  <string name="update_downloaded_notif">Toque para instalar a atualização</string>
-  <string name="downloading_cancel">Cancelar</string>
   <!-- Download failed -->
   <string name="download_failed_title">Falha no download</string>
   <string name="download_failed_text">A atualização falhou.\nToque no botão abaixo para verificar se há atualizações novamente.</string>
   <!-- Install -->
   <string name="install_title">Instalar atualização</string>
   <string name="install_text">Atualização baixada com sucesso.\n Toque no botão abaixo para instalar.</string>
-  <string name="install_action">Instalar</string>
   <!-- MD5 -->
   <string name="calculating_md5">Calculando a soma MD5…</string>
   <string name="md5_mismatch">MD5 incompatível</string>
@@ -51,29 +41,16 @@
   <string name="error_unknown">Erro: Desconhecido</string>
   <!-- Up To Date -->
   <string name="update_system_header_update_to_date">Atualização do sistema</string>
-  <string name="update_system_brief_description_update_to_date"><![CDATA[Versão CypherOS: %1$s<br>Nível do patch de manutenção: %2$s<br><br>Última verificação às %3$s]]></string>
-  <string name="update_system_action_check"><![CDATA[<b>Verificar atualização</b>]]></string>
   <!-- Update available -->
   <string name="update_system_header_update_available">Nova atualização disponível</string>
-  <string name="update_system_brief_description_update_available">%1$s</string>
-  <string name="update_system_action_download"><![CDATA[<b>Baixar</b>]]></string>
-  <string name="update_system_update_size">Tamanho da atualização: %1$s</string>
-  <string name="update_system_notification_update_available">CypherOS %1$s</string>
-  <string name="update_system_notification_update_available_desc">Toque para saber mais e baixar</string>
   <!-- Update checking message -->
-  <string name="update_system_header_update_checking">Verificando atualizações...</string>
   <!-- Downloading update -->
   <string name="update_system_header_update_downloading">Fazendo download da atualização…</string>
   <string name="update_system_brief_description_update_downloading">Fazendo o download… %1$s\nToque no botão abaixo para cancelar o download</string>
-  <string name="update_system_action_cancel"><![CDATA[<b>Cancelar</b>]]></string>
   <!-- Download failed -->
   <string name="update_system_header_update_downloading_failed">Falha no download</string>
   <string name="update_system_brief_description_update_downloading_failed">A atualização falhou.\nToque no botão abaixo para verificar se há atualizações novamente.</string>
   <!-- Install -->
   <string name="update_system_header_update_install">Instalar atualização</string>
-  <string name="update_system_brief_description_update_install">Atualização baixada com êxito.\nToque no botão abaixo para instalar.</string>
-  <string name="update_system_action_install"><![CDATA[<b>Instalar</b>]]></string>
   <string name="update_system_notification_install_update">A atualização está pronta</string>
-  <string name="update_system_notification_install_update_desc">Toque para instalar</string>
-  <string name="update_system_learn_more">Saiba mais</string>
 </resources>
