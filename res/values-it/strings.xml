@@ -51,7 +51,7 @@
   <string name="error_unknown">Errore: Sconosciuto</string>
   <!-- Up To Date -->
   <string name="update_system_header_update_to_date">Aggiornamento del sistema</string>
-  <string name="update_system_brief_description_update_to_date"><![CDATA[Versione CypherOS: %1$s<br>livello patch di manutenzione: %2$s<br><br>Ultima verifica dell' aggiornamento alle %3$s]]></string>
+  <string name="update_system_brief_description_update_to_date"><![CDATA[Versione CypherOS: %1$s<br>livello patch di manutenzione: %2$s<br><br>Ultima verifica dell\' aggiornamento alle %3$s]]></string>
   <string name="update_system_action_check"><![CDATA[<b>Ricerca aggiornamenti</b>]]></string>
   <!-- Update available -->
   <string name="update_system_header_update_available">Aggiornamento disponibile</string>
